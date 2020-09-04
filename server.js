@@ -14,7 +14,8 @@ server.use('/api/users', userRouter);
 server.use('/api/posts', postRouter);
 
 server.get('/', (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`);
+  res.send(`
+    <h2>Let's write some middleware!</h2>`);
 });
 
 //custom middleware
@@ -22,8 +23,10 @@ server.get('/', (req, res) => {
 function logger() {
   return (req, res, next) => {
     console.log(
-      `[${new Date().toISOString()}] ${req.method} to ${req.url} ${req.get(
-        'Origin')}`);
+      `[${new Date().toISOString()}]${req.method} to ${req.url} ${
+      req.get(
+        'Origin')
+      }`);
     next();
   };
 };
