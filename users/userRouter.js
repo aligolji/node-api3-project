@@ -64,7 +64,16 @@ router.put('/:id', (req, res) => {
 
 //custom middleware
 
-function validateUserId(req, res, next) {
+async function validateUserId(req, res, next) {
+  try - catch(500)
+const user = await Users.findUserById(req.params.id)
+if (user.length === 0) {
+  res.status(404)
+} else {
+  req.user = user
+  next();
+}
+
   if (req.params.id == id) {
     next();
   } else if (req.params.id !== id) {
